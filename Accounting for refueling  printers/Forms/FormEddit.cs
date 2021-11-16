@@ -52,6 +52,7 @@ namespace Accounting_for_refueling__printers.Forms
             if (Update1.ExecuteNonQuery() == 1)
             {
                 MessageBox.Show("Вставка успешно выполнена");
+                FormMainMenu.SelfRef.UpdateTable();
               
             }
             else
@@ -93,6 +94,10 @@ namespace Accounting_for_refueling__printers.Forms
                 {
                     MessageBox.Show("Записис таким id не найдено", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                comboBox1.Text = "";
+                comboBox2.Text = "";
                 }
 
            
