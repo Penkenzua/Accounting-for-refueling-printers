@@ -65,7 +65,6 @@ namespace Accounting_for_refueling__printers.Forms
             // 
             // comboBox1
             // 
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.printerBindingSource, "Модель", true));
             this.comboBox1.DataSource = this.printerBindingSource;
             this.comboBox1.DisplayMember = "Модель";
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -74,7 +73,6 @@ namespace Accounting_for_refueling__printers.Forms
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(200, 26);
             this.comboBox1.TabIndex = 4;
-            this.comboBox1.ValueMember = "Модель";
             // 
             // printerBindingSource
             // 

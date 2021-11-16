@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="DatabaseConnectionString (Settings)" DbObjectName="dbo.Printer" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT DISTINCT Модель FROM dbo.Printer</CommandText>
+                    <CommandText>SELECT  DISTINCT Модель FROM dbo.Printer</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -31,7 +31,7 @@
   <xs:element name="DatabaseDataSet4" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatabaseDataSet4" msprop:Generator_UserDSName="DatabaseDataSet4">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Printer" msprop:Generator_TableClassName="PrinterDataTable" msprop:Generator_TableVarName="tablePrinter" msprop:Generator_TablePropName="Printer" msprop:Generator_RowDeletingName="PrinterRowDeleting" msprop:Generator_RowChangingName="PrinterRowChanging" msprop:Generator_RowEvHandlerName="PrinterRowChangeEventHandler" msprop:Generator_RowDeletedName="PrinterRowDeleted" msprop:Generator_UserTableName="Printer" msprop:Generator_RowChangedName="PrinterRowChanged" msprop:Generator_RowEvArgName="PrinterRowChangeEvent" msprop:Generator_RowClassName="PrinterRow">
+        <xs:element name="Printer" msprop:Generator_TableClassName="PrinterDataTable" msprop:Generator_TableVarName="tablePrinter" msprop:Generator_RowChangedName="PrinterRowChanged" msprop:Generator_TablePropName="Printer" msprop:Generator_RowDeletingName="PrinterRowDeleting" msprop:Generator_RowChangingName="PrinterRowChanging" msprop:Generator_RowEvHandlerName="PrinterRowChangeEventHandler" msprop:Generator_RowDeletedName="PrinterRowDeleted" msprop:Generator_RowClassName="PrinterRow" msprop:Generator_UserTableName="Printer" msprop:Generator_RowEvArgName="PrinterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Модель" msprop:Generator_ColumnVarNameInTable="columnМодель" msprop:Generator_ColumnPropNameInRow="Модель" msprop:Generator_ColumnPropNameInTable="МодельColumn" msprop:Generator_UserColumnName="Модель">
