@@ -42,7 +42,7 @@ namespace Accounting_for_refueling__printers
         public void UpdateTable()
         {
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * From Printer", sqlConnection);
-            DataSet dataSet =  new  DataSet();
+            DataSet dataSet = new DataSet();
             sqlDataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
         }
@@ -190,7 +190,8 @@ namespace Accounting_for_refueling__printers
 
         public void FormMainMenu_Load(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+
 
             try
             {
@@ -199,48 +200,56 @@ namespace Accounting_for_refueling__printers
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-               
-             
-            } 
-            UpdateTable();
-            if (sqlConnection.State == ConnectionState.Open)
-            {
-            MessageBox.Show("Соеденение открыто");
+                DialogResult dialogResult = MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                if (dialogResult == DialogResult.OK)
+                {
+                    
+                }
+                else
+                {
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.InitialDirectory = Application.StartupPath;
+                        openFileDialog.Filter = "txt files (*.mdf)|*.mdf";
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            FileName = openFileDialog.FileName;
+                        }
+                        sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + FileName + " Integrated Security = True");
+                        sqlConnection.Open();
+                    }
+
+                }
             }
-                
-            
-           
-           
-        }
+                    UpdateTable();
 
-     
+                        if (sqlConnection.State == ConnectionState.Open)
+                        {
+                            MessageBox.Show("Соеденение открыто");
+                        }
 
-       
+           }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
+
+
+
+
+
+
+
+            private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
             {
-                znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
-            }
-            catch
-            {
-            }
+                try
+                {
+                    znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
+                }
+                catch
+                {
+                }
 
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (znachenie >= 0)
-            {
-                SqlCommand VDeleteLast3 = new SqlCommand($"Delete from Printer where id ={znachenie}", sqlConnection);
-                VDeleteLast3.ExecuteNonQuery();
-                UpdateTable();
             }
 
-            DialogResult dialogResult = MessageBox.Show("Вы действительно хотите безвозвратно удалить этоту запись? ", "Предупреждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.OK)
+            private void btnDelete_Click(object sender, EventArgs e)
             {
                 if (znachenie >= 0)
                 {
@@ -248,8 +257,19 @@ namespace Accounting_for_refueling__printers
                     VDeleteLast3.ExecuteNonQuery();
                     UpdateTable();
                 }
+
+                DialogResult dialogResult = MessageBox.Show("Вы действительно хотите безвозвратно удалить этоту запись? ", "Предупреждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.OK)
+                {
+                    if (znachenie >= 0)
+                    {
+                        SqlCommand VDeleteLast3 = new SqlCommand($"Delete from Printer where id ={znachenie}", sqlConnection);
+                        VDeleteLast3.ExecuteNonQuery();
+                        UpdateTable();
+                    }
+                }
+
             }
         }
-    }
 
-}
+    } 
