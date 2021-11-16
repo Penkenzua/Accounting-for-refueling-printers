@@ -192,8 +192,17 @@ namespace Accounting_for_refueling__printers
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename ="+Application.StartupPath+@"\Database.mdf; Integrated Security = True");
-            sqlConnection.Open(); 
+            try
+            {
+                sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + Application.StartupPath + @"\Database.mdf; Integrated Security = True");
+                sqlConnection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+               
+             
+            } 
             UpdateTable();
             if (sqlConnection.State == ConnectionState.Open)
             {
@@ -207,7 +216,21 @@ namespace Accounting_for_refueling__printers
 
      
 
-        private void button1_Click(object sender, EventArgs e)
+       
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
+            }
+            catch
+            {
+            }
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             if (znachenie >= 0)
             {
@@ -227,18 +250,6 @@ namespace Accounting_for_refueling__printers
                 }
             }
         }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
-            }
-            catch
-            {
-            }
-
-        }     
     }
 
 }
