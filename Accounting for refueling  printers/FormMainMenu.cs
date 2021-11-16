@@ -27,6 +27,7 @@ namespace Accounting_for_refueling__printers
         public FormMainMenu()
         {
 
+          
             InitializeComponent();
             random = new Random();
             SelfRef = this;

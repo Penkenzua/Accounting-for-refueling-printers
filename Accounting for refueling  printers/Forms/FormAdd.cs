@@ -17,8 +17,17 @@ namespace Accounting_for_refueling__printers.Forms
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "databaseDataSet4.Printer". При необходимости она может быть перемещена или удалена.
             this.printerTableAdapter.Fill(this.databaseDataSet4.Printer);
-            sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\Database.mdf;Integrated Security=True");
-            sqlConnection.Open();
+            try
+            {
+                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\Database.mdf;Integrated Security=True");
+                sqlConnection.Open();
+            }
+            catch 
+            {
+
+                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="++";Integrated Security=True");
+                sqlConnection.Open();
+            }
             comboBox1.Text = "";
            
 
