@@ -20,7 +20,7 @@ namespace Accounting_for_refueling__printers
         private int tempIndex;
         private Form activeForm;
         public int znachenie;
-        public string FileName { get; set; }
+     
 
 
         //Constructor
@@ -228,9 +228,9 @@ namespace Accounting_for_refueling__printers
                         openFileDialog.Filter = "txt files (*.mdf)|*.mdf";
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            FileName = openFileDialog.FileName;
+                            PathDatabase.Path = openFileDialog.FileName;
                         }
-                        sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + FileName + " Integrated Security = True");
+                        sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + PathDatabase.Path + " Integrated Security = True");
                         sqlConnection.Open();
                     }
 

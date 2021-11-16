@@ -25,7 +25,7 @@ namespace Accounting_for_refueling__printers.Forms
             catch 
             {
 
-                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="++";Integrated Security=True");
+                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+PathDatabase.Path+";Integrated Security=True");
                 sqlConnection.Open();
             }
             comboBox1.Text = "";

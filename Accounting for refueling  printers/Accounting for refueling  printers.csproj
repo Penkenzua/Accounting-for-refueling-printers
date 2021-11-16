@@ -135,6 +135,7 @@
     <Compile Include="Forms\FormEddit.Designer.cs">
       <DependentUpon>FormEddit.cs</DependentUpon>
     </Compile>
+    <Compile Include="PathDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeColor.cs" />
