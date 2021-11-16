@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -203,7 +204,20 @@ namespace Accounting_for_refueling__printers
                 DialogResult dialogResult = MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (dialogResult == DialogResult.OK)
                 {
-                    
+                    using (FileStream fstream = new FileStream(Application.StartupPath + @"/Database.mdf", FileMode.Create))
+                    {
+                        sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + Application.StartupPath + @"\Database.mdf; Integrated Security = True");
+                        sqlConnection.Open();
+                        SqlCommand CreateDataBbase = new SqlCommand("CREATE TABLE [Printer] " +
+                            "( [Id]        INT           IDENTITY (1, 1) NOT NULL, " +
+                            "[Дата]      DATE          NOT NULL," +
+                            "[Кабинет]   NVARCHAR (50) NOT NULL, " +
+                            "[Модель]    NVARCHAR (50) NOT NULL," +
+                            "[Операции]  NVARCHAR (50) NOT NULL, " +
+                            "[Состояние] NVARCHAR (50) NOT NULL," +
+                            " PRIMARY KEY CLUSTERED ([Id] ASC) );", sqlConnection);
+                        CreateDataBbase.ExecuteNonQuery();
+                    }
                 }
                 else
                 {
@@ -220,7 +234,7 @@ namespace Accounting_for_refueling__printers
                     }
 
                 }
-            }
+                } 
                     UpdateTable();
 
                         if (sqlConnection.State == ConnectionState.Open)
