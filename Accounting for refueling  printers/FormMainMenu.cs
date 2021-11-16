@@ -11,7 +11,7 @@ namespace Accounting_for_refueling__printers
 
     public partial class FormMainMenu : Form
     {
-        //Field        
+        //Fields        
         private SqlConnection sqlConnection;
         public static FormMainMenu SelfRef { get; set; }
         private Button curentButton;
