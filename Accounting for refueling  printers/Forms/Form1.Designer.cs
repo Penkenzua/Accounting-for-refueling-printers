@@ -1,7 +1,7 @@
 ﻿
 namespace Accounting_for_refueling__printers.Forms
 {
-    partial class Form1
+    partial class FormSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Accounting_for_refueling__printers.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSearch));
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -46,21 +46,21 @@ namespace Accounting_for_refueling__printers.Forms
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.printerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.databaseDataSet5 = new Accounting_for_refueling__printers.DatabaseDataSet5();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelTool = new System.Windows.Forms.Panel();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.databaseDataSet5 = new Accounting_for_refueling__printers.DatabaseDataSet5();
-            this.printerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.printerTableAdapter = new Accounting_for_refueling__printers.DatabaseDataSet5TableAdapters.PrinterTableAdapter();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.printerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet5)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelTool.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.printerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -228,6 +228,16 @@ namespace Accounting_for_refueling__printers.Forms
             this.comboBox1.TabIndex = 29;
             this.comboBox1.ValueMember = "Модель";
             // 
+            // printerBindingSource
+            // 
+            this.printerBindingSource.DataMember = "Printer";
+            this.printerBindingSource.DataSource = this.databaseDataSet5;
+            // 
+            // databaseDataSet5
+            // 
+            this.databaseDataSet5.DataSetName = "DatabaseDataSet5";
+            this.databaseDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // comboBox2
             // 
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -295,37 +305,27 @@ namespace Accounting_for_refueling__printers.Forms
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // databaseDataSet5
-            // 
-            this.databaseDataSet5.DataSetName = "DatabaseDataSet5";
-            this.databaseDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // printerBindingSource
-            // 
-            this.printerBindingSource.DataMember = "Printer";
-            this.printerBindingSource.DataSource = this.databaseDataSet5;
-            // 
             // printerTableAdapter
             // 
             this.printerTableAdapter.ClearBeforeFill = true;
             // 
-            // Form1
+            // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Name = "Form1";
-            this.Text = "Serch";
+            this.Name = "FormSearch";
+            this.Text = "Поиск в БД";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.printerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet5)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelTool.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.printerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

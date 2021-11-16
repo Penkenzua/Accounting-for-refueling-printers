@@ -121,7 +121,7 @@ namespace Accounting_for_refueling__printers
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Form1(), sender);
+            OpenChildForm(new Forms.FormSearch(), sender);
             btnCloseChildForm.Visible = true;
             btnDelete.Visible = false;
 

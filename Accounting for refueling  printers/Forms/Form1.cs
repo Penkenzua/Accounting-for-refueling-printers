@@ -10,11 +10,11 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Accounting_for_refueling__printers.Forms
 {
-    public partial class Form1 : Form
+    public partial class FormSearch : Form
     {
         public string filter;
         private SqlConnection sqlConnection = null;
-        public Form1()
+        public FormSearch()
         {
             InitializeComponent();
         }
