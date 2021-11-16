@@ -22,24 +22,18 @@ namespace Accounting_for_refueling__printers.Forms
                 sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\Database.mdf;Integrated Security=True");
                 sqlConnection.Open();
             }
-            catch 
+            catch
             {
-
-                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+PathDatabase.Path+";Integrated Security=True");
+                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + PathDatabase.Path + ";Integrated Security=True");
                 sqlConnection.Open();
             }
             comboBox1.Text = "";
-           
-
             LoadTheme();
-            
-         
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-    
-
             if (textBox1.Text != "" && textBox2.Text != "" && comboBox1.Text != "")
             {
                 DateTime date = DateTime.Parse(dateTimePicker1.Text);
@@ -48,36 +42,19 @@ namespace Accounting_for_refueling__printers.Forms
                 command.Parameters.AddWithValue("Кабинет", textBox1.Text);
                 command.Parameters.AddWithValue("Модель", comboBox1.Text);
                 command.Parameters.AddWithValue("Операции", textBox2.Text);
-
-                if (command.ExecuteNonQuery()==1)
+                if (command.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Вставка успешна завершена");
+                    FormMainMenu.SelfRef.UpdateTable();
 
-                    
-                        FormMainMenu.SelfRef.UpdateTable();
-                    
                 }
-                
+
             }
             else
             {
                 MessageBox.Show("Заполните все поля", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         void LoadTheme()
         {
             foreach (Control btns in this.Controls)
@@ -97,12 +74,6 @@ namespace Accounting_for_refueling__printers.Forms
             textBox1.ForeColor = ThemeColor.PrimaryColor;
             textBox2.ForeColor = ThemeColor.PrimaryColor;
             comboBox1.ForeColor = ThemeColor.PrimaryColor;
-
-
         }
-
-     
-
-      
     }
 }

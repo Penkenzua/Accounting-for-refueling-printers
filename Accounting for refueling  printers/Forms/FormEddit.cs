@@ -23,13 +23,13 @@ namespace Accounting_for_refueling__printers.Forms
                 sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\Database.mdf;Integrated Security=True");
                 sqlConnection.Open();
             }
-            catch 
+            catch
             {
 
-                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+PathDatabase.Path+ ";Integrated Security=True");
+                sqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + PathDatabase.Path + ";Integrated Security=True");
                 sqlConnection.Open();
             }
-      
+
 
             LoadTheme();
             comboBox1.Text = "";
@@ -40,11 +40,11 @@ namespace Accounting_for_refueling__printers.Forms
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-           
+
             DateTime date = DateTime.Parse(dateTimePicker1.Text);
             SqlCommand command = new SqlCommand($"Select id from Printer where id = {textBox1.Text}", sqlConnection);
 
-            if (textBox1.Text!="" && command.ExecuteScalar() != null)
+            if (textBox1.Text != "" && command.ExecuteScalar() != null)
             {
 
             }
@@ -62,7 +62,7 @@ namespace Accounting_for_refueling__printers.Forms
             {
                 MessageBox.Show("Вставка успешно выполнена");
                 FormMainMenu.SelfRef.UpdateTable();
-              
+
             }
             else
             {
@@ -71,45 +71,45 @@ namespace Accounting_for_refueling__printers.Forms
 
             }
 
-          
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
 
-            SqlCommand command = new SqlCommand($"Select id from Printer where id = {textBox1.Text}",sqlConnection);
-              
-
-                if (textBox1.Text != "" && command.ExecuteScalar()!=null)
-                {
-                    SqlCommand Edit1 = new SqlCommand($"Select Кабинет from Printer where id ={textBox1.Text}", sqlConnection);
-                    SqlCommand Edit2 = new SqlCommand($"Select Операции from Printer where id ={textBox1.Text}", sqlConnection);
-                    SqlCommand Edit3 = new SqlCommand($"Select Модель from Printer where id ={textBox1.Text}", sqlConnection);
-                    SqlCommand Edit4 = new SqlCommand($"Select Состояние from Printer where id ={textBox1.Text}", sqlConnection);
-                    SqlCommand Edit5 = new SqlCommand($"Select Дата from Printer where id ={textBox1.Text}", sqlConnection);
+            SqlCommand command = new SqlCommand($"Select id from Printer where id = {textBox1.Text}", sqlConnection);
 
 
-                    textBox2.Text = Edit1.ExecuteScalar().ToString();
-                    textBox3.Text = Edit2.ExecuteScalar().ToString();
-                    comboBox1.Text = Edit3.ExecuteScalar().ToString();
-                    comboBox2.Text = Edit4.ExecuteScalar().ToString();
+            if (textBox1.Text != "" && command.ExecuteScalar() != null)
+            {
+                SqlCommand Edit1 = new SqlCommand($"Select Кабинет from Printer where id ={textBox1.Text}", sqlConnection);
+                SqlCommand Edit2 = new SqlCommand($"Select Операции from Printer where id ={textBox1.Text}", sqlConnection);
+                SqlCommand Edit3 = new SqlCommand($"Select Модель from Printer where id ={textBox1.Text}", sqlConnection);
+                SqlCommand Edit4 = new SqlCommand($"Select Состояние from Printer where id ={textBox1.Text}", sqlConnection);
+                SqlCommand Edit5 = new SqlCommand($"Select Дата from Printer where id ={textBox1.Text}", sqlConnection);
 
-                    DateTime date = DateTime.Parse(Edit5.ExecuteScalar().ToString());
-                    int x = Convert.ToInt32(date.Year);
-                    int y = Convert.ToInt32(date.Month);
-                    int z = Convert.ToInt32(date.Day);
-                    dateTimePicker1.Value = new DateTime(x, y, z);
-                }
-                else
-                {
-                    MessageBox.Show("Записис таким id не найдено", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                textBox2.Text = Edit1.ExecuteScalar().ToString();
+                textBox3.Text = Edit2.ExecuteScalar().ToString();
+                comboBox1.Text = Edit3.ExecuteScalar().ToString();
+                comboBox2.Text = Edit4.ExecuteScalar().ToString();
+
+                DateTime date = DateTime.Parse(Edit5.ExecuteScalar().ToString());
+                int x = Convert.ToInt32(date.Year);
+                int y = Convert.ToInt32(date.Month);
+                int z = Convert.ToInt32(date.Day);
+                dateTimePicker1.Value = new DateTime(x, y, z);
+            }
+            else
+            {
+                MessageBox.Show("Записис таким id не найдено", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox1.Text = "";
                 textBox2.Text = "";
                 textBox3.Text = "";
                 comboBox1.Text = "";
                 comboBox2.Text = "";
-                }
+            }
 
-           
+
 
 
         }
@@ -139,6 +139,6 @@ namespace Accounting_for_refueling__printers.Forms
 
         }
 
-       
+
     }
 }
