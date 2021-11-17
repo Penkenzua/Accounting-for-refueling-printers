@@ -206,45 +206,36 @@ namespace Accounting_for_refueling__printers.Forms
                     panel1.Visible = false;
                     panel2.Visible = true;
                 }
-                catch
-                {
-
-                    MessageBox.Show("Введите хотя бы один фильтр", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
+                    catch
+                    {
+                        MessageBox.Show("Введите хотя бы один фильтр", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
             }
             else if (checkBox1.Checked && checkBox2.Checked)
             {
                 DateTime date = DateTime.Parse(dateTimePicker1.Text);
-                DateTime date1 = DateTime.Parse(dateTimePicker2.Text);
-
-
-
+                    DateTime date1 = DateTime.Parse(dateTimePicker2.Text);
                 if (textBox1.Text != "")
                 {
                     filter += $" Кабинет like '{textBox1.Text}%' and ";
                 }
-                if (comboBox1.Text != "")
-                {
-                    filter += $" Модель like '{comboBox1.Text}%' and ";
+                    if (comboBox1.Text != "")
+                    {
+                        filter += $" Модель like '{comboBox1.Text}%' and ";
 
-                }
+                    }
+                        filter += $" Дата between '{date.Year}.{date.Month}.{date.Day}' and '{date1.Year}.{date1.Month}.{date1.Day}' and ";
+                            if (comboBox1.Text != "")
+                            {
+                                filter += $" Операции like N'{textBox4.Text}%' and ";
 
-                filter += $" Дата between '{date.Year}.{date.Month}.{date.Day}' and '{date1.Year}.{date1.Month}.{date1.Day}' and ";
-                if (comboBox1.Text != "")
-                {
-                    filter += $" Операции like N'{textBox4.Text}%' and ";
-
-                }
+                            }
                 if (comboBox2.Text != "")
                 {
                     filter += $" Состояние like N'{comboBox2.Text}%' and ";
 
                 }
-
-
                 filter = filter.Remove(filter.Length - 4);
-
                 SqlDataAdapter dataAdapter = new SqlDataAdapter($"Select Дата, Кабинет, Модель, Операции, Состояние from Printer where {filter}", sqlConnection);
                 DataSet dataSetSearch = new DataSet();
                 dataAdapter.Fill(dataSetSearch);
@@ -252,11 +243,9 @@ namespace Accounting_for_refueling__printers.Forms
                 panel1.Visible = false;
                 panel2.Visible = true;
             }
-
         }
         void LoadTheme()
         {
-
             label1.ForeColor = ThemeColor.PrimaryColor;
             label2.ForeColor = ThemeColor.PrimaryColor;
             label3.ForeColor = ThemeColor.PrimaryColor;
@@ -281,8 +270,6 @@ namespace Accounting_for_refueling__printers.Forms
             btnPrint.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
             //Panel
             panelTool.BackColor = ThemeColor.ChangeColorBrightness(ThemeColor.PrimaryColor, -0.3);
-
-
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -296,7 +283,6 @@ namespace Accounting_for_refueling__printers.Forms
             {
                 checkBox1.Checked = false;
                 checkBox1.Enabled = true;
-
             }
         }
 
