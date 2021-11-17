@@ -252,19 +252,24 @@ namespace Accounting_for_refueling__printers
 
 
 
-            private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+
+           
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
             {
-                try
-                {
-                    znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
-                }
-                catch
-                {
-                }
-
+                znachenie = Convert.ToInt32(dataGridView1[0, e.RowIndex].Value);
             }
+            catch
+            {
+            }
+        }
 
-            private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Вы действительно хотите безвозвратно удалить этоту запись? ", "Предупреждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.OK)
             {
                 if (znachenie >= 0)
                 {
@@ -272,19 +277,8 @@ namespace Accounting_for_refueling__printers
                     VDeleteLast3.ExecuteNonQuery();
                     UpdateTable();
                 }
-
-                DialogResult dialogResult = MessageBox.Show("Вы действительно хотите безвозвратно удалить этоту запись? ", "Предупреждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.OK)
-                {
-                    if (znachenie >= 0)
-                    {
-                        SqlCommand VDeleteLast3 = new SqlCommand($"Delete from Printer where id ={znachenie}", sqlConnection);
-                        VDeleteLast3.ExecuteNonQuery();
-                        UpdateTable();
-                    }
-                }
-
             }
         }
+    }
 
     } 
