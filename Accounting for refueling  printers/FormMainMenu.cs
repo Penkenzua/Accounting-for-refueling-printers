@@ -202,7 +202,7 @@ namespace Accounting_for_refueling__printers
             }
             catch (Exception ex)
             {
-                DialogResult dialogResult = MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её(OK- Создать БД | Cancel - Найти БД)", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (dialogResult == DialogResult.OK)
                 {
                     using (FileStream fstream = new FileStream(Application.StartupPath + @"/Database.mdf", FileMode.Create))
