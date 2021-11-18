@@ -277,6 +277,10 @@ namespace Accounting_for_refueling__printers
                     VDeleteLast3.ExecuteNonQuery();
                     UpdateTable();
                 }
+                else
+                {
+                    MessageBox.Show("Выберите запись перед удалением", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }
