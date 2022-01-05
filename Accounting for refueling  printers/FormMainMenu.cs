@@ -283,6 +283,11 @@ namespace Accounting_for_refueling__printers
                 }
             }
         }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("\"Учёт заправки принтеров\" v1.0\nРазработал: Балабанов Артём Андреевич\nE-mail: artem.balabanov.2017@gmail.com","О программе",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
     }
 
     } 

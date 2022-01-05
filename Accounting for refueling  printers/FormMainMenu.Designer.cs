@@ -45,6 +45,7 @@ namespace Accounting_for_refueling__printers
             this.lblTittle = new System.Windows.Forms.Label();
             this.panelDesktopPane = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnInfo = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -56,6 +57,7 @@ namespace Accounting_for_refueling__printers
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.panelMenu.Controls.Add(this.btnInfo);
             this.panelMenu.Controls.Add(this.btnEddit);
             this.panelMenu.Controls.Add(this.btnSearch);
             this.panelMenu.Controls.Add(this.btnAdd);
@@ -258,6 +260,24 @@ namespace Accounting_for_refueling__printers
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
+            // btnInfo
+            // 
+            this.btnInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnInfo.FlatAppearance.BorderSize = 0;
+            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInfo.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
+            this.btnInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInfo.Location = new System.Drawing.Point(0, 224);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInfo.Size = new System.Drawing.Size(185, 50);
+            this.btnInfo.TabIndex = 4;
+            this.btnInfo.Text = "   О программе";
+            this.btnInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,6 +322,7 @@ namespace Accounting_for_refueling__printers
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnInfo;
     }
 }
 
