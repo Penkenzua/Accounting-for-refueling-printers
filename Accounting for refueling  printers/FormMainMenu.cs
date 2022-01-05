@@ -71,7 +71,6 @@ namespace Accounting_for_refueling__printers
             return ColorTranslator.FromHtml(color);
         }
 
-
         private void ActivateButon(object btnSender)
         {
             if (btnSender != null)
@@ -88,7 +87,6 @@ namespace Accounting_for_refueling__printers
                     panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
                     ThemeColor.PrimaryColor = color;
                     ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-
                 }
             }
         }
@@ -121,7 +119,6 @@ namespace Accounting_for_refueling__printers
                 }
             }
         }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormAdd(), sender);
@@ -129,7 +126,6 @@ namespace Accounting_for_refueling__printers
             btnDelete.Visible = false;
 
         }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormSearch(), sender);
@@ -137,7 +133,6 @@ namespace Accounting_for_refueling__printers
             btnDelete.Visible = false;
 
         }
-
         private void btnEddit_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormEddit(), sender);
@@ -145,11 +140,6 @@ namespace Accounting_for_refueling__printers
             btnDelete.Visible = false;
 
         }
-
-
-
-
-
         private void btnCloseChildForm_Click(object sender, EventArgs e)
         {
             if (activeForm != null)
@@ -157,7 +147,6 @@ namespace Accounting_for_refueling__printers
             Reset();
 
         }
-
         private void Reset()
         {
             DisableButton();
@@ -170,7 +159,6 @@ namespace Accounting_for_refueling__printers
 
 
         }
-
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -203,9 +191,6 @@ namespace Accounting_for_refueling__printers
 
         public void FormMainMenu_Load(object sender, EventArgs e)
         {
-
-
-
             try
             {
                 sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + Application.StartupPath + @"\Database.mdf; Integrated Security = True");
@@ -227,28 +212,14 @@ namespace Accounting_for_refueling__printers
                         sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + PathDatabase.Path + " Integrated Security = True");
                         sqlConnection.Open();
                     }
-
-                
                 } 
                     UpdateTable();
 
                         if (sqlConnection.State == ConnectionState.Open)
                         {   
                             MessageBox.Show(new Form { TopMost = true },"Соеденение открыто","Информация",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                           
                         }
-
            }
-
-
-
-
-
-
-
-
-
-           
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
