@@ -211,9 +211,9 @@ namespace Accounting_for_refueling__printers
                 sqlConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =" + Application.StartupPath + @"\Database.mdf; Integrated Security = True");
                 sqlConnection.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                DialogResult dialogResult = MessageBox.Show(ex.Message + "База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её(OK- Создать БД | Cancel - Найти БД)", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show("База данных не найдена или находится в другом месте выберите место нахождение базы данных или создайте её(OK- Создать БД | Cancel - Найти БД)", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (dialogResult == DialogResult.OK)
                 {
                     using (FileStream fstream = new FileStream(Application.StartupPath + @"/Database.mdf", FileMode.Create))
