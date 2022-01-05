@@ -1,5 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -40,9 +41,16 @@ namespace Accounting_for_refueling__printers.Forms
         }
         private void button2_Click(object sender, EventArgs e)
         {
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += ExportinExcel_DoWork;
+            worker.RunWorkerAsync();
+
+
             SqlCommand Update1 = new SqlCommand($"Update Printer " +
-               $"SET Состояние  = N'Выписано'" +
-               $" where {filter}", sqlConnection);
+             $"SET Состояние  = N'Выписано'" +
+             $" where {filter}", sqlConnection);
 
             if (Update1.ExecuteNonQuery() >= 1)
             {
@@ -57,77 +65,96 @@ namespace Accounting_for_refueling__printers.Forms
                 Update1.Cancel();
 
             }
+        
+            //SqlCommand Update1 = new SqlCommand($"Update Printer " +
+            //   $"SET Состояние  = N'Выписано'" +
+            //   $" where {filter}", sqlConnection);
+
+            //if (Update1.ExecuteNonQuery() >= 1)
+            //{
+            //    MessageBox.Show("Изменение true");
+            //    FormMainMenu.SelfRef.UpdateTable();
+
+
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Произошла ошибка обновления бд");
+            //    Update1.Cancel();
+
+            //}
 
 
 
 
-            try
-            {
+            //try
+            //{
 
-                DateTime now = DateTime.Now;
-                Excel.Application app = new Excel.Application();
-                Workbook workbook = app.Workbooks.Add(Type.Missing);
-                Worksheet worksheet = null;
+            //    DateTime now = DateTime.Now;
+            //    Excel.Application app = new Excel.Application();
+            //    Workbook workbook = app.Workbooks.Add(Type.Missing);
+            //    Worksheet worksheet = null;
 
-                worksheet = workbook.Sheets[1];
-                worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Exported from gridview";
-                //Fill Excel.
-                worksheet.Cells[1, 1] = $"Заправки принтеров за {now.ToString("Y").ToUpper()}";
+            //    worksheet = workbook.Sheets[1];
+            //    worksheet = workbook.ActiveSheet;
+            //    worksheet.Name = "Exported from gridview";
+            //    //Fill Excel.
+            //    worksheet.Cells[1, 1] = $"Заправки принтеров за {now.ToString("Y").ToUpper()}";
 
-                for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
-                {
-                    worksheet.Cells[2, i] = dataGridView1.Columns[i - 1].HeaderText;
-                }
-                worksheet.Cells[2, 5] = "Стоимость с НДС";
-                worksheet.Cells[2, 6] = "Б или В/Б";
-                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
-                {
-                    for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                    {
-                        if (j == 0)
-                        {
-                            worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString().Remove(dataGridView1.Rows[i].Cells[j].Value.ToString().Length - 8);
-                        }
-                        else if (j == 4)
-                        {
-                            continue;
-                        }
+            //    for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
+            //    {
+            //        worksheet.Cells[2, i] = dataGridView1.Columns[i - 1].HeaderText;
+            //    }
+            //    worksheet.Cells[2, 5] = "Стоимость с НДС";
+            //    worksheet.Cells[2, 6] = "Б или В/Б";
+            //    for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            //    {
+            //        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+            //        {
+            //            if (j == 0)
+            //            {
+            //                worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString().Remove(dataGridView1.Rows[i].Cells[j].Value.ToString().Length - 8);
+            //            }
+            //            else if (j == 4)
+            //            {
+            //                continue;
+            //            }
 
-                        else
-                        {
-                            worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
-                        }
-
-
-                    }
-
-                }
-                    //Format export in Excel.
-
-                    ((Range)worksheet.get_Range($"A1:F1")).Merge();
-                ((Range)worksheet.get_Range($"A1:F{dataGridView1.Rows.Count + 1}")).Cells.Borders.LineStyle = XlLineStyle.xlContinuous;
-                ((Range)worksheet.get_Range($"A1:F2")).Cells.Font.FontStyle = "Bold";
-                worksheet.Cells.Style.HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                worksheet.Cells.Font.Name = "Arial";
-                worksheet.Cells.Font.Size = 10;
-                worksheet.Columns.AutoFit();
-                app.Visible = true;
+            //            else
+            //            {
+            //                worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+            //            }
 
 
+            //        }
 
-            }
-            catch (Exception ex)
-            {
+            //    }
+            //        //Format export in Excel.
+
+            //        ((Range)worksheet.get_Range($"A1:F1")).Merge();
+            //    ((Range)worksheet.get_Range($"A1:F{dataGridView1.Rows.Count + 1}")).Cells.Borders.LineStyle = XlLineStyle.xlContinuous;
+            //    ((Range)worksheet.get_Range($"A1:F2")).Cells.Font.FontStyle = "Bold";
+            //    worksheet.Cells.Style.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            //    worksheet.Cells.Font.Name = "Arial";
+            //    worksheet.Cells.Font.Size = 10;
+            //    worksheet.Columns.AutoFit();
+            //    app.Visible = true;
 
 
 
-                MessageBox.Show(ex.Message, "Ошибка экспорта данных Excel таблицу");
-            }
-            filter = "";
+            //}
+            //catch (Exception ex)
+            //{
+
+
+
+            //    MessageBox.Show(ex.Message, "Ошибка экспорта данных Excel таблицу");
+            //}
+            //filter = "";
 
 
         }
+        
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -294,6 +321,79 @@ namespace Accounting_for_refueling__printers.Forms
                 panel1.Visible = true;
                 filter = "";
             }
+        }
+
+        private void ExportinExcel_DoWork(object sender, DoWorkEventArgs e)
+        {
+           
+
+
+
+
+            try
+            {
+
+                DateTime now = DateTime.Now;
+                Excel.Application app = new Excel.Application();
+                Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Worksheet worksheet = null;
+
+                worksheet = workbook.Sheets[1];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Exported from gridview";
+                //Fill Excel.
+                worksheet.Cells[1, 1] = $"Заправки принтеров за {now.ToString("Y").ToUpper()}";
+
+                for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[2, i] = dataGridView1.Columns[i - 1].HeaderText;
+                }
+                worksheet.Cells[2, 5] = "Стоимость с НДС";
+                worksheet.Cells[2, 6] = "Б или В/Б";
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                    {
+                        if (j == 0)
+                        {
+                            worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString().Remove(dataGridView1.Rows[i].Cells[j].Value.ToString().Length - 8);
+                        }
+                        else if (j == 4)
+                        {
+                            continue;
+                        }
+
+                        else
+                        {
+                            worksheet.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        }
+
+
+                    }
+
+                }
+                    //Format export in Excel.
+
+                    ((Range)worksheet.get_Range($"A1:F1")).Merge();
+                ((Range)worksheet.get_Range($"A1:F{dataGridView1.Rows.Count + 1}")).Cells.Borders.LineStyle = XlLineStyle.xlContinuous;
+                ((Range)worksheet.get_Range($"A1:F2")).Cells.Font.FontStyle = "Bold";
+                worksheet.Cells.Style.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                worksheet.Cells.Font.Name = "Arial";
+                worksheet.Cells.Font.Size = 10;
+                worksheet.Columns.AutoFit();
+                app.Visible = true;
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+
+
+                MessageBox.Show(ex.Message, "Ошибка экспорта данных Excel таблицу");
+            }
+            
         }
     }
 }

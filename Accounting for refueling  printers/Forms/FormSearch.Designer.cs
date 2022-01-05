@@ -55,6 +55,7 @@ namespace Accounting_for_refueling__printers.Forms
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.printerTableAdapter = new Accounting_for_refueling__printers.DatabaseDataSet5TableAdapters.PrinterTableAdapter();
+            this.ExportinExcel = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.printerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet5)).BeginInit();
@@ -307,6 +308,10 @@ namespace Accounting_for_refueling__printers.Forms
             // 
             this.printerTableAdapter.ClearBeforeFill = true;
             // 
+            // ExportinExcel
+            // 
+            this.ExportinExcel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ExportinExcel_DoWork);
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,5 +359,6 @@ namespace Accounting_for_refueling__printers.Forms
         private DatabaseDataSet5 databaseDataSet5;
         private System.Windows.Forms.BindingSource printerBindingSource;
         private DatabaseDataSet5TableAdapters.PrinterTableAdapter printerTableAdapter;
+        private System.ComponentModel.BackgroundWorker ExportinExcel;
     }
 }
