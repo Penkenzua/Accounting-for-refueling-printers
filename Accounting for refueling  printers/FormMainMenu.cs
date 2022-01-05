@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -27,8 +28,12 @@ namespace Accounting_for_refueling__printers
         public FormMainMenu()
         {
 
-          
+            Thread t = new Thread(new ThreadStart(StartForm));
+            t.Start();
+            Thread.Sleep(5000);
+
             InitializeComponent();
+            t.Abort(t);
             random = new Random();
             SelfRef = this;
             this.Text = string.Empty;
@@ -41,6 +46,12 @@ namespace Accounting_for_refueling__printers
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         //Metods
+
+
+        public void StartForm()
+        {
+            Application.Run(new SplashScreen());
+        }
         public void UpdateTable()
         {
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * From Printer", sqlConnection);
@@ -239,8 +250,9 @@ namespace Accounting_for_refueling__printers
                     UpdateTable();
 
                         if (sqlConnection.State == ConnectionState.Open)
-                        {
-                            MessageBox.Show("Соеденение открыто");
+                        {   
+                            MessageBox.Show(new Form { TopMost = true },"Соеденение открыто","Информация",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                           
                         }
 
            }

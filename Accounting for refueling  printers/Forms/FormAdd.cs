@@ -48,7 +48,9 @@ namespace Accounting_for_refueling__printers.Forms
                     FormMainMenu.SelfRef.UpdateTable();
 
                 }
-
+                textBox1.Text = "";
+                textBox2.Text = "";
+                comboBox1.Text = "";
             }
             else
             {

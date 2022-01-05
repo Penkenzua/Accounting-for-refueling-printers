@@ -324,11 +324,6 @@ namespace Accounting_for_refueling__printers.Forms
 
         private void ExportinExcel_DoWork(object sender, DoWorkEventArgs e)
         {
-           
-
-
-
-
             try
             {
 
@@ -373,7 +368,7 @@ namespace Accounting_for_refueling__printers.Forms
                 }
                     //Format export in Excel.
 
-                    ((Range)worksheet.get_Range($"A1:F1")).Merge();
+                ((Range)worksheet.get_Range($"A1:F1")).Merge();
                 ((Range)worksheet.get_Range($"A1:F{dataGridView1.Rows.Count + 1}")).Cells.Borders.LineStyle = XlLineStyle.xlContinuous;
                 ((Range)worksheet.get_Range($"A1:F2")).Cells.Font.FontStyle = "Bold";
                 worksheet.Cells.Style.HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -381,9 +376,7 @@ namespace Accounting_for_refueling__printers.Forms
                 worksheet.Cells.Font.Size = 10;
                 worksheet.Columns.AutoFit();
                 app.Visible = true;
-
-
-
+                
             }
             catch (Exception ex)
             {
